@@ -1,0 +1,18 @@
+spring:
+  data:
+    mongodb:
+      uri: "mongodb://localhost:27017/shorteners"
+  main:
+    banner-mode: "off"
+
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      base-path: /
+
+cache:
+  evict:
+    time: 60000

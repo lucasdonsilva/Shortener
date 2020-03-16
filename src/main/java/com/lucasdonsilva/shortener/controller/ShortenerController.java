@@ -27,7 +27,7 @@ public class ShortenerController {
     private final ShortenerService service;
 
     @PostMapping
-    public ResponseEntity<ResponseShortenerDTO> create(@RequestBody @Valid RequestShortenerDTO body,
+    public ResponseEntity<?> create(@RequestBody @Valid RequestShortenerDTO body,
                                                        UriComponentsBuilder builder) throws InvalidUrlException {
 
         log.info("Accessing endpoint create with url: {}", body.getUrl());
@@ -39,7 +39,7 @@ public class ShortenerController {
     }
 
     @GetMapping("/{alias}")
-    public ResponseEntity<ResponseShortenerDTO> findByAlias(@PathVariable String alias) throws NotFoundException {
+    public ResponseEntity<?> findByAlias(@PathVariable String alias) throws NotFoundException {
 
         log.info("Accessing endpoint findByAlias with alias: {}", alias);
 

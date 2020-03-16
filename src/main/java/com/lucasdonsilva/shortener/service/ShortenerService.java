@@ -42,7 +42,7 @@ public class ShortenerService {
         return mapper.mapToResponses(repository.findTop10ByOrderByAccessDesc());
     }
 
-    public void validateUrl(String url) throws InvalidUrlException {
+    private void validateUrl(String url) throws InvalidUrlException {
         try{
             new URL(url);
         } catch (MalformedURLException ex) {

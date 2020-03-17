@@ -44,7 +44,7 @@ Assim que o mongo estiver de pé, basta alterar a string de conexão no applicat
  
 ## Endpoints disponíveis.
 
-### Cadastrar uma url (POST): http://localhost:8080/shorteners
+### Cadastrar uma url (POST): https://shortener-lucas.herokuapp.com/shorteners
 
 **JSON:**
 
@@ -63,17 +63,17 @@ Assim que o mongo estiver de pé, basta alterar a string de conexão no applicat
 **Response data:** 
 
 ```
-Header: Location = http://localhost:8080/shorteners/abcdef
+Header: Location = https://shortener-lucas.herokuapp.com/shorteners/abcdef
 ```
 
-### Redirecionar uma url (GET): http://localhost:8080/shorteners/{alias}
+### Redirecionar uma url (GET): https://shortener-lucas.herokuapp.com/shorteners/{alias}
 
 **Status:** 302 -> Redireciona para a url cadastrada no alias.
 
 **Status:** 404 -> Alias não encontrado.
 
 
-### Método GET: http://localhost:8080/shorteners/top10
+### Método GET: https://shortener-lucas.herokuapp.com/shorteners/top10
 
 **Status:** 200 -> Retorna um array vazio ou top 10 de urls mais acessadas.
 
@@ -103,4 +103,4 @@ Header: Location = http://localhost:8080/shorteners/abcdef
 
 Acessar o endopoint abaixo para ver a saúde da aplicação e suas dependencias.
 
-- http://localhost:8080/health
+- https://shortener-lucas.herokuapp.com/health

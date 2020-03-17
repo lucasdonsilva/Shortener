@@ -15,9 +15,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 
-import static java.nio.charset.Charset.forName;
 import static java.nio.charset.StandardCharsets.UTF_8;
 import static org.springframework.util.StreamUtils.copyToString;
 

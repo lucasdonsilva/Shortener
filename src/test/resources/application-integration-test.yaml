@@ -1,0 +1,4 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://shortener:teste@localhost:5656/base?options=value

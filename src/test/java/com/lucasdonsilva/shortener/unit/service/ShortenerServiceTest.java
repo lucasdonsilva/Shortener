@@ -20,7 +20,7 @@ import java.util.Optional;
 
 import static java.util.Arrays.asList;
 import static java.util.Optional.of;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -56,7 +56,7 @@ public class ShortenerServiceTest {
 
         var response = service.create(request);
 
-        assertEquals("abc", response);
+        assertThat("abc").isEqualTo(response);
         verify(repository).existsById(anyString());
         verify(mapper).mapToDocument(any());
         verify(repository).save(any());
@@ -70,7 +70,7 @@ public class ShortenerServiceTest {
         request.setUrl("www.google.com");
 
         InvalidUrlException exception = assertThrows(InvalidUrlException.class, () -> service.create(request));
-        assertEquals("url is invalid.", exception.getMessage());
+        assertThat("url www.google.com is invalid.").isEqualTo(exception.getMessage());
     }
 
     @Test
@@ -87,7 +87,7 @@ public class ShortenerServiceTest {
 
         var response = service.findByAlias("abc");
 
-        assertEquals(document.getUrl(), response);
+        assertThat(document.getUrl()).isEqualTo(response);
         verify(repository).findByAlias(alias);
         verify(repository).save(any(ShortenerDocument.class));
     }
@@ -102,7 +102,7 @@ public class ShortenerServiceTest {
 
         var exception = assertThrows(NotFoundException.class, () -> service.findByAlias("abc"));
 
-        assertEquals("alias " + alias + " not found.", exception.getMessage());
+        assertThat("alias " + alias + " not found.").isEqualTo(exception.getMessage());
         verify(repository).findByAlias(alias);
     }
 
@@ -151,15 +151,15 @@ public class ShortenerServiceTest {
 
         var list = service.findTopTen();
 
-        assertEquals(doc3.getUrl(), list.get(0).getUrl());
-        assertEquals(doc3.getAlias(), list.get(0).getAlias());
-        assertEquals(doc3.getAccess(), list.get(0).getAccess());
-        assertEquals(doc2.getUrl(), list.get(1).getUrl());
-        assertEquals(doc2.getAlias(), list.get(1).getAlias());
-        assertEquals(doc2.getAccess(), list.get(1).getAccess());
-        assertEquals(doc1.getUrl(), list.get(2).getUrl());
-        assertEquals(doc1.getAlias(), list.get(2).getAlias());
-        assertEquals(doc1.getAccess(), list.get(2).getAccess());
+        assertThat(doc3.getUrl()).isEqualTo(list.get(0).getUrl());
+        assertThat(doc3.getAlias()).isEqualTo(list.get(0).getAlias());
+        assertThat(doc3.getAccess()).isEqualTo(list.get(0).getAccess());
+        assertThat(doc2.getUrl()).isEqualTo(list.get(1).getUrl());
+        assertThat(doc2.getAlias()).isEqualTo(list.get(1).getAlias());
+        assertThat(doc2.getAccess()).isEqualTo(list.get(1).getAccess());
+        assertThat(doc1.getUrl()).isEqualTo(list.get(2).getUrl());
+        assertThat(doc1.getAlias()).isEqualTo(list.get(2).getAlias());
+        assertThat(doc1.getAccess()).isEqualTo(list.get(2).getAccess());
         verify(repository).findTop10ByOrderByAccessDesc();
         verify(mapper).mapToResponses(documents);
     }

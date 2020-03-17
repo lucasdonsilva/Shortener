@@ -12,13 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import java.util.List;
-
 import static java.util.Arrays.asList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.http.HttpStatus.*;
@@ -43,8 +40,8 @@ public class ShortenerControllerTest {
 
         var response = controller.create(body, UriComponentsBuilder.newInstance());
 
-        assertEquals("/shorteners/abc", response.getHeaders().getLocation().getPath());
-        assertEquals(CREATED, response.getStatusCode());
+        assertThat("/shorteners/abc").isEqualTo(response.getHeaders().getLocation().getPath());
+        assertThat(CREATED).isEqualTo(response.getStatusCode());
         verify(service).create(body);
     }
 
@@ -56,8 +53,8 @@ public class ShortenerControllerTest {
 
         var response = controller.findByAlias("abc");
 
-        assertEquals("www.google.com", response.getHeaders().getLocation().toString());
-        assertEquals(FOUND, response.getStatusCode());
+        assertThat("www.google.com").isEqualTo(response.getHeaders().getLocation().toString());
+        assertThat(FOUND).isEqualTo(response.getStatusCode());
         verify(service).findByAlias("abc");
     }
 
@@ -85,17 +82,17 @@ public class ShortenerControllerTest {
 
         var response = controller.findTopTenByAccess();
 
-        assertEquals(shorteners.size(), 3);
-        assertEquals(shorteners.get(0).getUrl(), "www.g1.globo.com");
-        assertEquals(shorteners.get(0).getAlias(), "hij");
-        assertEquals(shorteners.get(0).getAccess(), 50);
-        assertEquals(shorteners.get(1).getUrl(), "www.facebook.com");
-        assertEquals(shorteners.get(1).getAlias(), "efg");
-        assertEquals(shorteners.get(1).getAccess(), 20);
-        assertEquals(shorteners.get(2).getUrl(), "www.google.com");
-        assertEquals(shorteners.get(2).getAlias(), "abc");
-        assertEquals(shorteners.get(2).getAccess(), 10);
-        assertEquals(OK, response.getStatusCode());
+        assertThat(shorteners.size()).isEqualTo(3);
+        assertThat(shorteners.get(0).getUrl()).isEqualTo("www.g1.globo.com");
+        assertThat(shorteners.get(0).getAlias()).isEqualTo("hij");
+        assertThat(shorteners.get(0).getAccess()).isEqualTo(50);
+        assertThat(shorteners.get(1).getUrl()).isEqualTo("www.facebook.com");
+        assertThat(shorteners.get(1).getAlias()).isEqualTo("efg");
+        assertThat(shorteners.get(1).getAccess()).isEqualTo(20);
+        assertThat(shorteners.get(2).getUrl()).isEqualTo("www.google.com");
+        assertThat(shorteners.get(2).getAlias()).isEqualTo("abc");
+        assertThat(shorteners.get(2).getAccess()).isEqualTo(10);
+        assertThat(OK).isEqualTo(response.getStatusCode());
         verify(service).findTopTen();
     }
 }

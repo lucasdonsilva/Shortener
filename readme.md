@@ -2,6 +2,10 @@
 
 O projeto consiste em encurtar uma url gerando um alias randomico.
 
+## Link da aplicação rodando no heroku
+
+https://shortener-lucas.herokuapp.com/
+
 ## Tecnologias utilizadas.
 
 - Java 11 - Escolhido por ser uma das ultimas versões do java com diversas otimizações.
